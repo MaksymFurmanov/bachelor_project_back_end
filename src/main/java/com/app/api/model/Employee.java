@@ -1,13 +1,15 @@
 package com.app.api.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="employees")
+@Table(name = "employees")
 public class Employee {
     @Id
+    @Column(nullable = false)
     int employee_id;
     int department_id;
     String name;
@@ -28,7 +30,8 @@ public class Employee {
         this.password = password;
     }
 
-    public Employee() {}
+    public Employee() {
+    }
 
     public int getEmployee_id() {
         return employee_id;
