@@ -4,9 +4,9 @@ import com.app.api.model.Employee;
 import com.app.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class EmployeeController {
@@ -17,16 +17,30 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping("/user/log_in")
+    @GetMapping("/user/log-in")
     public ResponseEntity<Employee> logInUser(@RequestParam String username,
                                               @RequestParam String password) {
-        if (username == null || password == null) return ResponseEntity.badRequest().build();
+        if (username == null || password == null)
+            return ResponseEntity.badRequest().build();
         Employee result = employeeService.logIn(username, password);
-        if(result != null){
+        if (result != null) {
             return ResponseEntity.ok(result);
-        }
-        else {
+        } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/employees/get-employees")
+    public ResponseEntity<List<Employee>> getEmployees() {
+        List<Employee> employees = employeeService.getEmployees();
+        System.out.println(employees);
+        if(employees != null) return ResponseEntity.ok(employees);
+        return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/employees/load-employees")
+    public ResponseEntity<Void> loadEmployees(@RequestBody() Employee[] employees) {
+        employeeService.loadEmployees(employees);
+        return ResponseEntity.ok(null);
     }
 }

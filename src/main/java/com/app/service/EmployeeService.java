@@ -5,6 +5,9 @@ import com.app.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Service
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
@@ -22,4 +25,11 @@ public class EmployeeService {
         return null;
     }
 
+    public List<Employee> getEmployees() {
+        return employeeRepository.findAll();
+    }
+
+    public void loadEmployees(Employee[] employees) {
+        employeeRepository.saveAll(Arrays.asList(employees));
+    }
 }
