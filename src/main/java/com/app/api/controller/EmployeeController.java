@@ -33,7 +33,6 @@ public class EmployeeController {
     @GetMapping("/employees/get-employees")
     public ResponseEntity<List<Employee>> getEmployees() {
         List<Employee> employees = employeeService.getEmployees();
-        System.out.println(employees);
         if(employees != null) return ResponseEntity.ok(employees);
         return ResponseEntity.notFound().build();
     }

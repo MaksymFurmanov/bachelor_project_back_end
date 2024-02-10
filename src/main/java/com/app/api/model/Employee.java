@@ -1,24 +1,29 @@
 package com.app.api.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "employees")
 public class Employee {
     @Id
-    @Column(nullable = false)
-    int employee_id;
-    int department_id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long employee_id;
+    Long department_id;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "department_id", referencedColumnName = "department_id", insertable = false, updatable = false)
+    Department department;
+
     String name;
+
     String position;
+
     String date_of_birth;
+
     String login;
+
     String password;
 
-    public Employee(int employee_id, int department_id, String name,
+    public Employee(Long employee_id, Long department_id, String name,
                     String position, String date_of_birth,
                     String login, String password) {
         this.employee_id = employee_id;
@@ -30,22 +35,21 @@ public class Employee {
         this.password = password;
     }
 
-    public Employee() {
-    }
+    public Employee() {}
 
-    public int getEmployee_id() {
+    public Long getEmployee_id() {
         return employee_id;
     }
 
-    public void setEmployee_id(int employee_id) {
+    public void setEmployee_id(Long employee_id) {
         this.employee_id = employee_id;
     }
 
-    public int getDepartment_id() {
+    public Long getDepartment_id() {
         return department_id;
     }
 
-    public void setDepartment_id(int department_id) {
+    public void setDepartment_id(Long department_id) {
         this.department_id = department_id;
     }
 
