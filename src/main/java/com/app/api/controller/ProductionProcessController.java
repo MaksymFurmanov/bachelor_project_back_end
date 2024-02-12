@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -29,6 +30,7 @@ public class ProductionProcessController {
 
     @PostMapping("/production-processes/load-production-processes")
     public ResponseEntity<Void> loadProductionProcesses(@RequestBody() ProductionProcess[] productionProcesses) {
+        System.out.println(Arrays.toString(productionProcesses));
         productionProcessService.loadProductionProcesses(productionProcesses);
         return ResponseEntity.ok(null);
     }

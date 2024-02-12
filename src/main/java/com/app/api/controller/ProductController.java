@@ -13,23 +13,23 @@ import java.util.List;
 
 @RestController
 public class ProductController {
-    private final ProductService procuctService;
+    private final ProductService productService;
 
     @Autowired
-    public ProductController(ProductService procuctService) {
-        this.procuctService = procuctService;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
     @GetMapping("/products/get-products")
     public ResponseEntity<List<Product>> getProducts() {
-        List<Product> products = procuctService.getProducts();
+        List<Product> products = productService.getProducts();
         if(products != null) return ResponseEntity.ok(products);
         return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/products/load-products")
     public ResponseEntity<Void> loadProducts(@RequestBody() Product[] products) {
-        procuctService.loadProducts(products);
+        productService.loadProducts(products);
         return ResponseEntity.ok(null);
     }
 }

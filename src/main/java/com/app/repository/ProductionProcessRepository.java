@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductionProcessRepository extends JpaRepository<ProductionProcess, Integer> {
+public interface ProductionProcessRepository extends JpaRepository<ProductionProcess, Long> {
 }

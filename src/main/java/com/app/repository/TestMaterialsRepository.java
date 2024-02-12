@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TestMaterialsRepository extends JpaRepository<TestMaterials, Integer> {
+public interface TestMaterialsRepository extends JpaRepository<TestMaterials, Long> {
 }

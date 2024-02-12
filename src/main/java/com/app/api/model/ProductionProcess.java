@@ -6,7 +6,8 @@ import jakarta.persistence.*;
 @Table(name = "production_processes")
 public class ProductionProcess {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "production_process_seq_gen")
+    @SequenceGenerator(name = "production_process_seq_gen", sequenceName = "production_process_seq_gen", allocationSize = 1)
     Long production_process_id;
 
     Long product_id;

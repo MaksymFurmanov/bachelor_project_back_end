@@ -6,8 +6,9 @@ import jakarta.persistence.*;
 @Table(name = "products")
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Long test_id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_seq_gen")
+    @SequenceGenerator(name = "product_seq_gen", sequenceName = "product_seq_gen", allocationSize = 1)
+    Long product_id;
 
     String name;
 
@@ -21,10 +22,10 @@ public class Product {
 
     String img;
 
-    public Product(Long test_id, String name, String type,
+    public Product(Long product_id, String name, String type,
                    int per_pallet, String pallet_color,
                    String quality_standards, String img) {
-        this.test_id = test_id;
+        this.product_id = product_id;
         this.name = name;
         this.type = type;
         this.per_pallet = per_pallet;
@@ -35,12 +36,12 @@ public class Product {
 
     public Product() {}
 
-    public Long getTest_id() {
-        return test_id;
+    public Long getProduct_id() {
+        return product_id;
     }
 
-    public void setTest_id(Long test_id) {
-        this.test_id = test_id;
+    public void setProduct_id(Long product_id) {
+        this.product_id = product_id;
     }
 
     public String getName() {
@@ -94,7 +95,7 @@ public class Product {
     @Override
     public String toString() {
         return "Product{" +
-                "test_id=" + test_id +
+                "test_id=" + product_id +
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", per_pallet=" + per_pallet +

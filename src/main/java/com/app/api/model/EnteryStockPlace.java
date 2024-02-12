@@ -6,7 +6,8 @@ import jakarta.persistence.*;
 @Table(name = "entery_stock_places")
 public class EnteryStockPlace {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "entery_stock_place_seq_gen")
+    @SequenceGenerator(name = "entery_stock_place_seq_gen", sequenceName = "entery_stock_place_seq_gen", allocationSize = 1)
     Long entery_stock_place_id;
 
     Long material_id;
@@ -15,15 +16,15 @@ public class EnteryStockPlace {
     @JoinColumn(name = "material_id", referencedColumnName = "material_id", insertable = false, updatable = false)
     Material material;
 
-    int group;
+    int box;
 
-    int index;
+    int queue;
 
-    public EnteryStockPlace(Long entery_stock_place_id, Long material_id, int group, int index) {
+    public EnteryStockPlace(Long entery_stock_place_id, Long material_id, int box, int index) {
         this.entery_stock_place_id = entery_stock_place_id;
         this.material_id = material_id;
-        this.group = group;
-        this.index = index;
+        this.box = box;
+        this.queue = index;
     }
 
     public EnteryStockPlace() {}
@@ -44,20 +45,20 @@ public class EnteryStockPlace {
         this.material_id = material_id;
     }
 
-    public int getGroup() {
-        return group;
+    public int getBox() {
+        return box;
     }
 
-    public void setGroup(int group) {
-        this.group = group;
+    public void setBox(int box) {
+        this.box = box;
     }
 
-    public int getIndex() {
-        return index;
+    public int getQueue() {
+        return queue;
     }
 
-    public void setIndex(int index) {
-        this.index = index;
+    public void setQueue(int queue) {
+        this.queue = queue;
     }
 
     @Override
@@ -65,8 +66,8 @@ public class EnteryStockPlace {
         return "EnteryStockPlace{" +
                 "entery_stock_place_id=" + entery_stock_place_id +
                 ", material_id=" + material_id +
-                ", group=" + group +
-                ", index=" + index +
+                ", box=" + box +
+                ", queue=" + queue +
                 '}';
     }
 }

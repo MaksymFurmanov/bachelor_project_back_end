@@ -6,7 +6,8 @@ import jakarta.persistence.*;
 @Table(name = "tests_products")
 public class TestProducts {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "test_products_seq_gen")
+    @SequenceGenerator(name = "test_products_seq_gen", sequenceName = "test_products_seq_gen", allocationSize = 1)
     Long test_id;
 
     Long order_id;
@@ -15,13 +16,13 @@ public class TestProducts {
     @JoinColumn(name = "order_id", referencedColumnName = "order_id", insertable = false, updatable = false)
     Order order;
 
-    String status;
+    int status;
 
     Boolean accepted;
 
     String document;
 
-    public TestProducts(Long test_id, Long order_id, String status, Boolean accepted, String document) {
+    public TestProducts(Long test_id, Long order_id, int status, Boolean accepted, String document) {
         this.test_id = test_id;
         this.order_id = order_id;
         this.status = status;
@@ -47,11 +48,11 @@ public class TestProducts {
         this.order_id = order_id;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

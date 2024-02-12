@@ -6,7 +6,8 @@ import jakarta.persistence.*;
 @Table(name = "materials")
 public class Material {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "material_seq_gen")
+    @SequenceGenerator(name = "material_seq_gen", sequenceName = "material_seq_gen", allocationSize = 1)
     Long material_id;
 
     String supplier;

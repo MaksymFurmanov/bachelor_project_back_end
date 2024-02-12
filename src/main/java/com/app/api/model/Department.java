@@ -6,7 +6,8 @@ import jakarta.persistence.*;
 @Table(name = "departments")
 public class Department {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "department_seq_gen")
+    @SequenceGenerator(name = "department_seq_gen", sequenceName = "department_seq_gen", allocationSize = 1)
     Long department_id;
 
     Long manager_id;
