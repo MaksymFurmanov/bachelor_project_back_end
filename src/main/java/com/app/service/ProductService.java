@@ -21,6 +21,10 @@ public class ProductService {
         return productRepository.findAll();
     }
 
+    public void newProduct (Product product) {
+        productRepository.save(product);
+    }
+
     public void loadProducts(Product[] products) {
         productRepository.saveAll(Arrays.asList(products));
     }

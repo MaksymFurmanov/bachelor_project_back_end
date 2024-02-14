@@ -37,6 +37,13 @@ public class EmployeeController {
         return ResponseEntity.notFound().build();
     }
 
+    @PostMapping("/new")
+    public ResponseEntity<Void> newEmployee(@RequestBody() Employee employee) {
+        if(employee != null)employeeService.newEmployee(employee);
+        else return ResponseEntity.badRequest().build();
+        return ResponseEntity.ok(null);
+    }
+
     @PostMapping("/employees/load-employees")
     public ResponseEntity<Void> loadEmployees(@RequestBody() Employee[] employees) {
         employeeService.loadEmployees(employees);

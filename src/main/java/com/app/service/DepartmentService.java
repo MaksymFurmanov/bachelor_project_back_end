@@ -21,6 +21,10 @@ public class DepartmentService {
         return departmentRepository.findAll();
     }
 
+    public void newDepartment (Department department) {
+        departmentRepository.save(department);
+    }
+
     public void loadDepartments(Department[] departments) {
         departmentRepository.saveAll(Arrays.asList(departments));
     }

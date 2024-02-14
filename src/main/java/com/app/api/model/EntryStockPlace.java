@@ -3,8 +3,8 @@ package com.app.api.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "entery_stock_places")
-public class EnteryStockPlace {
+@Table(name = "ENTRY_STOCK_PLACES")
+public class EntryStockPlace {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "entery_stock_place_seq_gen")
     @SequenceGenerator(name = "entery_stock_place_seq_gen", sequenceName = "entery_stock_place_seq_gen", allocationSize = 1)
@@ -20,14 +20,14 @@ public class EnteryStockPlace {
 
     int queue;
 
-    public EnteryStockPlace(Long entery_stock_place_id, Long material_id, int box, int index) {
+    public EntryStockPlace(Long entery_stock_place_id, Long material_id, int box, int index) {
         this.entery_stock_place_id = entery_stock_place_id;
         this.material_id = material_id;
         this.box = box;
         this.queue = index;
     }
 
-    public EnteryStockPlace() {}
+    public EntryStockPlace() {}
 
     public Long getEntery_stock_place_id() {
         return entery_stock_place_id;

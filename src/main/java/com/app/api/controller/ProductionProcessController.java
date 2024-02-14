@@ -4,15 +4,13 @@ import com.app.api.model.ProductionProcess;
 import com.app.service.ProductionProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
 
 @RestController
+@RequestMapping("/production-processes")
 public class ProductionProcessController {
     private final ProductionProcessService productionProcessService;
 
@@ -21,14 +19,21 @@ public class ProductionProcessController {
         this.productionProcessService = productionProcessService;
     }
 
-    @GetMapping("/production-processes/get-production-processes")
+    @GetMapping("/get-production-processes")
     public ResponseEntity<List<ProductionProcess>> getProductionProcesses() {
         List<ProductionProcess> productionProcesses = productionProcessService.getProductionProcesses();
         if(productionProcesses != null) return ResponseEntity.ok(productionProcesses);
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/production-processes/load-production-processes")
+    @PostMapping("/new")
+    public ResponseEntity<Void> newProductionProcess(@RequestBody() ProductionProcess productionProcess) {
+        if(productionProcess != null)productionProcessService.newProductionProcess(productionProcess);
+        else return ResponseEntity.badRequest().build();
+        return ResponseEntity.ok(null);
+    }
+
+    @PostMapping("/load-production-processes")
     public ResponseEntity<Void> loadProductionProcesses(@RequestBody() ProductionProcess[] productionProcesses) {
         System.out.println(Arrays.toString(productionProcesses));
         productionProcessService.loadProductionProcesses(productionProcesses);

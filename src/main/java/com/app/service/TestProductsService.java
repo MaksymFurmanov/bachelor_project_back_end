@@ -21,6 +21,10 @@ public class TestProductsService {
         return testProductsRepository.findAll();
     }
 
+    public void newTestProducts (TestProducts testProducts) {
+        testProductsRepository.save(testProducts);
+    }
+
     public void loadTestsProducts(TestProducts[] testsProducts) {
         testProductsRepository.saveAll(Arrays.asList(testsProducts));
     }

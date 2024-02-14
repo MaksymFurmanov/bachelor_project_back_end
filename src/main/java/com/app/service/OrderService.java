@@ -21,6 +21,10 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
+    public void newOrder (Order order) {
+        orderRepository.save(order);
+    }
+
     public void loadOrders(Order[] orders) {
         orderRepository.saveAll(Arrays.asList(orders));
     }

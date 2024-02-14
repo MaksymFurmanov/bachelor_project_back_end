@@ -21,6 +21,10 @@ public class MaterialService {
         return materialRepository.findAll();
     }
 
+    public Material newMaterial (Material material) {
+        return materialRepository.save(material);
+    }
+
     public void loadMaterials(Material[] materials) {
         materialRepository.saveAll(Arrays.asList(materials));
     }

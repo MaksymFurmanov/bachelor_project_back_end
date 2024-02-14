@@ -18,14 +18,14 @@ public class Material {
 
     String pallet_color;
 
-    String per_pallet;
+    int per_pallet;
 
     String date_of_order;
 
     String arriving_date;
 
     public Material(Long material_id, String supplier, String name, int volume, String pallet_color,
-                    String per_pallet, String date_of_order, String arriving_date) {
+                    int per_pallet, String date_of_order, String arriving_date) {
         this.material_id = material_id;
         this.supplier = supplier;
         this.name = name;
@@ -78,11 +78,11 @@ public class Material {
         this.pallet_color = pallet_color;
     }
 
-    public String getPer_pallet() {
+    public int getPer_pallet() {
         return per_pallet;
     }
 
-    public void setPer_pallet(String per_pallet) {
+    public void setPer_pallet(int per_pallet) {
         this.per_pallet = per_pallet;
     }
 

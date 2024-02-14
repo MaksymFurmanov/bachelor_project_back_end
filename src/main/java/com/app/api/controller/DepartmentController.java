@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/departments")
 public class DepartmentController {
     private final DepartmentService departmentService;
 
@@ -17,14 +18,21 @@ public class DepartmentController {
         this.departmentService = departmentService;
     }
 
-    @GetMapping("/departments/get-departments")
+    @GetMapping("/get-departments")
     public ResponseEntity<List<Department>> getDepartments() {
         List<Department> departments = departmentService.getDepartments();
         if(departments != null) return ResponseEntity.ok(departments);
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/departments/load-departments")
+    @PostMapping("/new")
+    public ResponseEntity<Void> newDepartment(@RequestBody() Department department) {
+        if(department != null)departmentService.newDepartment(department);
+        else return ResponseEntity.badRequest().build();
+        return ResponseEntity.ok(null);
+    }
+
+    @PostMapping("/load-departments")
     public ResponseEntity<Void> loadDepartments(@RequestBody() Department[] departments) {
         departmentService.loadDepartments(departments);
         return ResponseEntity.ok(null);

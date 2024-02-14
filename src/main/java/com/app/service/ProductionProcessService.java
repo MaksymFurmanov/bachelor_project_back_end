@@ -21,6 +21,10 @@ public class ProductionProcessService {
         return productionProcessRepository.findAll();
     }
 
+    public void newProductionProcess (ProductionProcess productionProcess) {
+        productionProcessRepository.save(productionProcess);
+    }
+
     public void loadProductionProcesses(ProductionProcess[] productionProcesses) {
         productionProcessRepository.saveAll(Arrays.asList(productionProcesses));
     }
