@@ -26,10 +26,10 @@ public class ProductController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<Void> newProduct(@RequestBody() Product product) {
-        if(product != null)productService.newProduct(product);
-        else return ResponseEntity.badRequest().build();
-        return ResponseEntity.ok(null);
+    public ResponseEntity<Product> newProduct(@RequestBody() Product product) {
+        if(product == null)return ResponseEntity.badRequest().build();
+        Product newProduct = productService.newProduct(product);
+        return ResponseEntity.ok(newProduct);
     }
 
     @PostMapping("/load-products")

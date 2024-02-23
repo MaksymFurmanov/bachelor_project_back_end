@@ -26,10 +26,10 @@ public class EntryStockPlaceController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<Void> newEntryStockPlace(@RequestBody() EntryStockPlace entryStockPlace) {
-        if(entryStockPlace != null)entryStockPlaceService.newEntryStockPlace(entryStockPlace);
-        else return ResponseEntity.badRequest().build();
-        return ResponseEntity.ok(null);
+    public ResponseEntity<EntryStockPlace> newEntryStockPlace(@RequestBody() EntryStockPlace entryStockPlace) {
+        if(entryStockPlace == null)return ResponseEntity.badRequest().build();
+        EntryStockPlace newEntryStockPlace = entryStockPlaceService.newEntryStockPlace(entryStockPlace);
+        return ResponseEntity.ok(newEntryStockPlace);
     }
 
     @PostMapping("/load-entry-stock-places")

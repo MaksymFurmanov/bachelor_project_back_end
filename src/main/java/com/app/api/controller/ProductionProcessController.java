@@ -27,10 +27,10 @@ public class ProductionProcessController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<Void> newProductionProcess(@RequestBody() ProductionProcess productionProcess) {
-        if(productionProcess != null)productionProcessService.newProductionProcess(productionProcess);
-        else return ResponseEntity.badRequest().build();
-        return ResponseEntity.ok(null);
+    public ResponseEntity<ProductionProcess> newProductionProcess(@RequestBody() ProductionProcess productionProcess) {
+        if(productionProcess == null)return ResponseEntity.badRequest().build();
+        ProductionProcess newProductionProcess = productionProcessService.newProductionProcess(productionProcess);
+        return ResponseEntity.ok(newProductionProcess);
     }
 
     @PostMapping("/load-production-processes")

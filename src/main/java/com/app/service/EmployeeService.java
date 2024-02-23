@@ -29,8 +29,8 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public void newEmployee (Employee employee) {
-        employeeRepository.save(employee);
+    public Employee newEmployee (Employee employee) {
+        return employeeRepository.save(employee);
     }
 
     public void loadEmployees(Employee[] employees) {

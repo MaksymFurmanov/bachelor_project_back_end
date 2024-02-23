@@ -38,10 +38,10 @@ public class EmployeeController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<Void> newEmployee(@RequestBody() Employee employee) {
-        if(employee != null)employeeService.newEmployee(employee);
-        else return ResponseEntity.badRequest().build();
-        return ResponseEntity.ok(null);
+    public ResponseEntity<Employee> newEmployee(@RequestBody() Employee employee) {
+        if(employee == null)return ResponseEntity.badRequest().build();
+        Employee newEmployee = employeeService.newEmployee(employee);
+        return ResponseEntity.ok(newEmployee);
     }
 
     @PostMapping("/employees/load-employees")

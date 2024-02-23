@@ -21,8 +21,8 @@ public class TestProductsService {
         return testProductsRepository.findAll();
     }
 
-    public void newTestProducts (TestProducts testProducts) {
-        testProductsRepository.save(testProducts);
+    public TestProducts newTestProducts (TestProducts testProducts) {
+        return testProductsRepository.save(testProducts);
     }
 
     public void loadTestsProducts(TestProducts[] testsProducts) {

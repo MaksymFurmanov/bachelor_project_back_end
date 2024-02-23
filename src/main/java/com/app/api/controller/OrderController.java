@@ -26,10 +26,17 @@ public class OrderController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<Void> newOrder(@RequestBody() Order order) {
-        if(order != null)orderService.newOrder(order);
-        else return ResponseEntity.badRequest().build();
-        return ResponseEntity.ok(null);
+    public ResponseEntity<Order> newOrder(@RequestBody() Order order) {
+        if(order == null)return ResponseEntity.badRequest().build();
+        Order newOrder = orderService.newOrder(order);
+        return ResponseEntity.ok(newOrder);
+    }
+
+    @PostMapping("/done")
+    public ResponseEntity<Void> processDone(@RequestBody() Long orderId) {
+        if(orderId == null)ResponseEntity.badRequest().build();
+        orderService.processDone(orderId);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/load-orders")

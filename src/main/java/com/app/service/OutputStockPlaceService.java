@@ -21,8 +21,8 @@ public class OutputStockPlaceService {
         return outputStockPlaceRepository.findAll();
     }
 
-    public void newOutputStockPlace (OutputStockPlace outputStockPlace) {
-        outputStockPlaceRepository.save(outputStockPlace);
+    public OutputStockPlace newOutputStockPlace (OutputStockPlace outputStockPlace) {
+        return outputStockPlaceRepository.save(outputStockPlace);
     }
 
     public void loadOutputStockPlaces(OutputStockPlace[] outputStockPlaces) {

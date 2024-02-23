@@ -27,9 +27,9 @@ public class MaterialController {
 
     @PostMapping("/new")
     public ResponseEntity<Material> newMaterial(@RequestBody() Material material) {
+        if(material == null)return ResponseEntity.badRequest().build();
         Material newMaterial = materialService.newMaterial(material);
-        if(newMaterial != null)return ResponseEntity.ok(newMaterial);
-        else return ResponseEntity.badRequest().build();
+        return ResponseEntity.ok(newMaterial);
     }
 
     @PostMapping("/load-materials")

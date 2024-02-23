@@ -19,17 +19,17 @@ public class TestMaterialsController {
     }
 
     @GetMapping("/get-tests-materials")
-    public ResponseEntity<List<TestMaterials>> getTestsMaterials() {
+    public ResponseEntity<List<TestMaterials>> getTestaMaterials() {
         List<TestMaterials> testsMaterials = testMaterialsService.getTestsMaterials();
         if(testsMaterials != null) return ResponseEntity.ok(testsMaterials);
         return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/new")
-    public ResponseEntity<Void> newTestMaterials(@RequestBody() TestMaterials testMaterials) {
-        if(testMaterials != null)testMaterialsService.newTestMaterials(testMaterials);
-        else return ResponseEntity.badRequest().build();
-        return ResponseEntity.ok(null);
+    public ResponseEntity<TestMaterials> newTestMaterials(@RequestBody() TestMaterials testMaterials) {
+        if(testMaterials == null)return ResponseEntity.badRequest().build();
+        TestMaterials newTestMaterials = testMaterialsService.newTestMaterials(testMaterials);
+        return ResponseEntity.ok(newTestMaterials);
     }
 
     @PostMapping("/load-tests-materials")

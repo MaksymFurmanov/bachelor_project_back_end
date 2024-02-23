@@ -21,8 +21,8 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public void newProduct (Product product) {
-        productRepository.save(product);
+    public Product newProduct (Product product) {
+        return productRepository.save(product);
     }
 
     public void loadProducts(Product[] products) {

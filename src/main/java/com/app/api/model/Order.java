@@ -27,25 +27,23 @@ public class Order {
 
     int volume;
 
-    String pallet_color;
-
     String deadline;
 
     String done_date;
 
     public Order(Long order_id, Long product_id, Long production_process_id, String customer,
-                 int volume, String pallet_color, String deadline, String done_date) {
+                 int volume, String deadline, String done_date) {
         this.order_id = order_id;
         this.product_id = product_id;
         this.production_process_id = production_process_id;
         this.customer = customer;
         this.volume = volume;
-        this.pallet_color = pallet_color;
         this.deadline = deadline;
         this.done_date = done_date;
     }
 
-    public Order() {}
+    public Order() {
+    }
 
     public Long getOrder_id() {
         return order_id;
@@ -61,6 +59,14 @@ public class Order {
 
     public void setProduct_id(Long product_id) {
         this.product_id = product_id;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public ProductionProcess getProductionProcess() {
+        return productionProcess;
     }
 
     public Long getProduction_process_id() {
@@ -87,14 +93,6 @@ public class Order {
         this.volume = volume;
     }
 
-    public String getPallet_color() {
-        return pallet_color;
-    }
-
-    public void setPallet_color(String pallet_color) {
-        this.pallet_color = pallet_color;
-    }
-
     public String getDeadline() {
         return deadline;
     }
@@ -119,7 +117,6 @@ public class Order {
                 ", production_process_id=" + production_process_id +
                 ", customer='" + customer + '\'' +
                 ", volume=" + volume +
-                ", pallet_color='" + pallet_color + '\'' +
                 ", deadline='" + deadline + '\'' +
                 ", done_date='" + done_date + '\'' +
                 '}';

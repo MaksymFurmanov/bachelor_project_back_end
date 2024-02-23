@@ -26,10 +26,10 @@ public class DepartmentController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<Void> newDepartment(@RequestBody() Department department) {
-        if(department != null)departmentService.newDepartment(department);
-        else return ResponseEntity.badRequest().build();
-        return ResponseEntity.ok(null);
+    public ResponseEntity<Department> newDepartment(@RequestBody() Department department) {
+        if(department == null)return ResponseEntity.badRequest().build();
+        Department newDepartment = departmentService.newDepartment(department);
+        return ResponseEntity.ok(newDepartment);
     }
 
     @PostMapping("/load-departments")

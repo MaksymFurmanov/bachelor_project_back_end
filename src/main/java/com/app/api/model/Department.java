@@ -11,6 +11,7 @@ public class Department {
     Long department_id;
 
     Long manager_id;
+
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "manager_id", referencedColumnName = "employee_id", insertable = false, updatable = false)
     Employee manager;
