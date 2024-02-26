@@ -1,6 +1,7 @@
 package com.app.service;
 
 import com.app.api.model.Employee;
+import com.app.repository.DepartmentRepository;
 import com.app.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,8 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
     @Autowired
-    public EmployeeService(EmployeeRepository employeeRepository) {
+    public EmployeeService(EmployeeRepository employeeRepository,
+                           DepartmentRepository departmentRepository) {
         this.employeeRepository = employeeRepository;
     }
 

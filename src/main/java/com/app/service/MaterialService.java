@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -27,5 +28,9 @@ public class MaterialService {
 
     public void loadMaterials(Material[] materials) {
         materialRepository.saveAll(Arrays.asList(materials));
+    }
+
+    public void deleteMaterials(Long materialId) {
+        materialRepository.deleteAllById(Collections.singleton(materialId));
     }
 }

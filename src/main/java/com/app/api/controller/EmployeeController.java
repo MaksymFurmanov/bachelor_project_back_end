@@ -37,7 +37,7 @@ public class EmployeeController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/new")
+    @PostMapping("/employees/new")
     public ResponseEntity<Employee> newEmployee(@RequestBody() Employee employee) {
         if(employee == null)return ResponseEntity.badRequest().build();
         Employee newEmployee = employeeService.newEmployee(employee);

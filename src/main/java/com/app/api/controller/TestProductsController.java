@@ -34,6 +34,7 @@ public class TestProductsController {
 
     @PostMapping("/load-tests-products")
     public ResponseEntity<Void> loadTestsProducts(@RequestBody() TestProducts[] testsProducts) {
+        if(testsProducts == null)return ResponseEntity.badRequest().build();
         testProductsService.loadTestsProducts(testsProducts);
         return ResponseEntity.ok(null);
     }

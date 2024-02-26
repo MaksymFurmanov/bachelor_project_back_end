@@ -18,6 +18,13 @@ public class OrderController {
         this.orderService = orderService;
     }
 
+    @PostMapping("/done")
+    public ResponseEntity<Void> processDone(@RequestBody() Long orderId) {
+        if(orderId == null)ResponseEntity.badRequest().build();
+        orderService.processDone(orderId);
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/get-orders")
     public ResponseEntity<List<Order>> getOrders() {
         List<Order> orders = orderService.getOrders();
@@ -30,13 +37,6 @@ public class OrderController {
         if(order == null)return ResponseEntity.badRequest().build();
         Order newOrder = orderService.newOrder(order);
         return ResponseEntity.ok(newOrder);
-    }
-
-    @PostMapping("/done")
-    public ResponseEntity<Void> processDone(@RequestBody() Long orderId) {
-        if(orderId == null)ResponseEntity.badRequest().build();
-        orderService.processDone(orderId);
-        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/load-orders")

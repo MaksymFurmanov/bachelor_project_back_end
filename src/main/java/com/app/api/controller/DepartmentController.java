@@ -1,6 +1,7 @@
 package com.app.api.controller;
 
 import com.app.api.model.Department;
+import com.app.api.model.Employee;
 import com.app.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,13 @@ public class DepartmentController {
         if(department == null)return ResponseEntity.badRequest().build();
         Department newDepartment = departmentService.newDepartment(department);
         return ResponseEntity.ok(newDepartment);
+    }
+
+    @PostMapping("/set-manager")
+    public ResponseEntity<Void> setManager(@RequestBody() Employee employee) {
+        if (employee == null)return ResponseEntity.notFound().build();
+        if(departmentService.setManager(employee))return null;
+        else return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/load-departments")

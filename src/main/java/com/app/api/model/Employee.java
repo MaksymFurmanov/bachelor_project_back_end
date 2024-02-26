@@ -54,6 +54,14 @@ public class Employee {
         this.department_id = department_id;
     }
 
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
     public String getName() {
         return name;
     }
