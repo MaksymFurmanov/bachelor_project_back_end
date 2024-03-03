@@ -22,7 +22,8 @@ public class TestProducts {
 
     String document;
 
-    public TestProducts(Long test_id, Long order_id, int status, Boolean accepted, String document) {
+    public TestProducts(Long test_id, Long order_id,
+                        int status, Boolean accepted, String document) {
         this.test_id = test_id;
         this.order_id = order_id;
         this.status = status;
@@ -46,6 +47,14 @@ public class TestProducts {
 
     public void setOrder_id(Long order_id) {
         this.order_id = order_id;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public int getStatus() {
@@ -77,7 +86,8 @@ public class TestProducts {
         return "TestProducts{" +
                 "test_id=" + test_id +
                 ", order_id=" + order_id +
-                ", status='" + status + '\'' +
+                ", order=" + order +
+                ", status=" + status +
                 ", accepted=" + accepted +
                 ", document='" + document + '\'' +
                 '}';

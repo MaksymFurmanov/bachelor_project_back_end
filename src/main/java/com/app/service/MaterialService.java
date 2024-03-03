@@ -23,14 +23,15 @@ public class MaterialService {
     }
 
     public Material newMaterial (Material material) {
-        return materialRepository.save(material);
+        Material savedMaterial = materialRepository.save(material);
+        return materialRepository.findById(savedMaterial.getMaterial_id()).orElse(null);
     }
 
-    public void loadMaterials(Material[] materials) {
-        materialRepository.saveAll(Arrays.asList(materials));
+    public List<Material> loadMaterials(Material[] materials) {
+        return materialRepository.saveAll(Arrays.asList(materials));
     }
 
-    public void deleteMaterials(Long materialId) {
+    public void deleteMaterial(Long materialId) {
         materialRepository.deleteAllById(Collections.singleton(materialId));
     }
 }

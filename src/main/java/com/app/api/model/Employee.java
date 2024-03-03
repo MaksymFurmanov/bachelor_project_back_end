@@ -58,10 +58,6 @@ public class Employee {
         return department;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
     public String getName() {
         return name;
     }
@@ -107,6 +103,7 @@ public class Employee {
         return "Employee{" +
                 "employee_id=" + employee_id +
                 ", department_id=" + department_id +
+                ", department=" + department +
                 ", name='" + name + '\'' +
                 ", position='" + position + '\'' +
                 ", date_of_birth='" + date_of_birth + '\'' +

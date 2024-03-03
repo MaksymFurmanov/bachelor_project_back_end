@@ -19,10 +19,9 @@ public class OrderController {
     }
 
     @PostMapping("/done")
-    public ResponseEntity<Void> processDone(@RequestBody() Long orderId) {
+    public ResponseEntity<Order> processDone(@RequestBody() Long orderId) {
         if(orderId == null)ResponseEntity.badRequest().build();
-        orderService.processDone(orderId);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(orderService.processDone(orderId));
     }
 
     @GetMapping("/get-orders")
@@ -36,12 +35,19 @@ public class OrderController {
     public ResponseEntity<Order> newOrder(@RequestBody() Order order) {
         if(order == null)return ResponseEntity.badRequest().build();
         Order newOrder = orderService.newOrder(order);
-        return ResponseEntity.ok(newOrder);
+        if(newOrder != null) return ResponseEntity.ok(newOrder);
+        return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/load-orders")
-    public ResponseEntity<Void> loadOrders(@RequestBody() Order[] orders) {
-        orderService.loadOrders(orders);
+    public ResponseEntity<List<Order>> loadOrders(@RequestBody() Order[] orders) {
+        return ResponseEntity.ok(orderService.loadOrders(orders));
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<Void> deleteOrder(@RequestBody() Long orderId) {
+        if (orderId == null) return ResponseEntity.badRequest().build();
+        orderService.deleteOrder(orderId);
         return ResponseEntity.ok(null);
     }
 }

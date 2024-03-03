@@ -22,7 +22,8 @@ public class TestMaterials {
 
     String document;
 
-    public TestMaterials(Long test_id, Long material_id, int status, Boolean accepted, String document) {
+    public TestMaterials(Long test_id, Long material_id, int status,
+                         Boolean accepted, String document) {
         this.test_id = test_id;
         this.material_id = material_id;
         this.status = status;
@@ -46,6 +47,14 @@ public class TestMaterials {
 
     public void setMaterial_id(Long material_id) {
         this.material_id = material_id;
+    }
+
+    public Material getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 
     public int getStatus() {
@@ -77,7 +86,8 @@ public class TestMaterials {
         return "TestMaterials{" +
                 "test_id=" + test_id +
                 ", material_id=" + material_id +
-                ", status='" + status + '\'' +
+                ", material=" + material +
+                ", status=" + status +
                 ", accepted=" + accepted +
                 ", document='" + document + '\'' +
                 '}';

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -14,8 +15,7 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
     @Autowired
-    public EmployeeService(EmployeeRepository employeeRepository,
-                           DepartmentRepository departmentRepository) {
+    public EmployeeService(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
 
@@ -32,10 +32,15 @@ public class EmployeeService {
     }
 
     public Employee newEmployee (Employee employee) {
-        return employeeRepository.save(employee);
+        Employee savedEmployee = employeeRepository.save(employee);
+        return employeeRepository.findById(savedEmployee.getEmployee_id()).orElse(null);
     }
 
-    public void loadEmployees(Employee[] employees) {
-        employeeRepository.saveAll(Arrays.asList(employees));
+    public List<Employee> loadEmployees(Employee[] employees) {
+        return employeeRepository.saveAll(Arrays.asList(employees));
+    }
+
+    public void deleteEmployee(Long employeeId) {
+        employeeRepository.deleteAllById(Collections.singleton(employeeId));
     }
 }

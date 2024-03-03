@@ -45,6 +45,14 @@ public class OutputStockPlace {
         this.order_id = order_id;
     }
 
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
     public int getBox() {
         return box;
     }
@@ -66,6 +74,7 @@ public class OutputStockPlace {
         return "OutputStockPlace{" +
                 "output_stock_place_id=" + output_stock_place_id +
                 ", order_id=" + order_id +
+                ", order=" + order +
                 ", box=" + box +
                 ", queue=" + queue +
                 '}';

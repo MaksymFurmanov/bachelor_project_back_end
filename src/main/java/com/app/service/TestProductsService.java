@@ -22,10 +22,11 @@ public class TestProductsService {
     }
 
     public TestProducts newTestProducts (TestProducts testProducts) {
-        return testProductsRepository.save(testProducts);
+        TestProducts savedTestProducts = testProductsRepository.save(testProducts);
+        return testProductsRepository.findById(savedTestProducts.getTest_id()).orElse(null);
     }
 
-    public void loadTestsProducts(TestProducts[] testsProducts) {
-        testProductsRepository.saveAll(Arrays.asList(testsProducts));
+    public List<TestProducts> loadTestsProducts(TestProducts[] testsProducts) {
+        return testProductsRepository.saveAll(Arrays.asList(testsProducts));
     }
 }

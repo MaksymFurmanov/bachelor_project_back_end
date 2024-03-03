@@ -29,20 +29,20 @@ public class MaterialController {
     public ResponseEntity<Material> newMaterial(@RequestBody() Material material) {
         if (material == null) return ResponseEntity.badRequest().build();
         Material newMaterial = materialService.newMaterial(material);
-        return ResponseEntity.ok(newMaterial);
+        if(newMaterial != null) return ResponseEntity.ok(newMaterial);
+        return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/load-materials")
-    public ResponseEntity<Void> loadMaterials(@RequestBody() Material[] materials) {
-        if (materials != null) materialService.loadMaterials(materials);
+    public ResponseEntity<List<Material>> loadMaterials(@RequestBody() Material[] materials) {
+        if (materials != null) return ResponseEntity.ok(materialService.loadMaterials(materials));
         else return ResponseEntity.badRequest().build();
-        return ResponseEntity.ok(null);
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<Void> deleteMaterials(@RequestBody() Long materialId) {
+    public ResponseEntity<Void> deleteMaterial(@RequestBody() Long materialId) {
         if (materialId == null) return ResponseEntity.badRequest().build();
-        materialService.deleteMaterials(materialId);
+        materialService.deleteMaterial(materialId);
         return ResponseEntity.ok(null);
     }
 }

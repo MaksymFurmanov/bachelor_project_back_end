@@ -110,7 +110,7 @@ public class Material {
                 ", name='" + name + '\'' +
                 ", volume=" + volume +
                 ", pallet_color='" + pallet_color + '\'' +
-                ", per_pallet='" + per_pallet + '\'' +
+                ", per_pallet=" + per_pallet +
                 ", date_of_order='" + date_of_order + '\'' +
                 ", arriving_date='" + arriving_date + '\'' +
                 '}';

@@ -41,12 +41,19 @@ public class EmployeeController {
     public ResponseEntity<Employee> newEmployee(@RequestBody() Employee employee) {
         if(employee == null)return ResponseEntity.badRequest().build();
         Employee newEmployee = employeeService.newEmployee(employee);
-        return ResponseEntity.ok(newEmployee);
+        if(newEmployee != null) return ResponseEntity.ok(newEmployee);
+        return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/employees/load-employees")
-    public ResponseEntity<Void> loadEmployees(@RequestBody() Employee[] employees) {
-        employeeService.loadEmployees(employees);
+    public ResponseEntity<List<Employee>> loadEmployees(@RequestBody() Employee[] employees) {
+        return ResponseEntity.ok(employeeService.loadEmployees(employees));
+    }
+
+    @DeleteMapping("employees/delete")
+    public ResponseEntity<Void> deleteEmployee(@RequestBody() Long employeeId) {
+        if (employeeId == null) return ResponseEntity.badRequest().build();
+        employeeService.deleteEmployee(employeeId);
         return ResponseEntity.ok(null);
     }
 }

@@ -42,8 +42,7 @@ public class Order {
         this.done_date = done_date;
     }
 
-    public Order() {
-    }
+    public Order() {}
 
     public Long getOrder_id() {
         return order_id;

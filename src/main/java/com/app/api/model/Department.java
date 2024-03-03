@@ -55,6 +55,7 @@ public class Department {
         return "Department{" +
                 "department_id=" + department_id +
                 ", manager_id=" + manager_id +
+                ", manager=" + manager +
                 ", name='" + name + '\'' +
                 '}';
     }

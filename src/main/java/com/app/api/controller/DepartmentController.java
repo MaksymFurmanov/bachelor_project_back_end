@@ -30,7 +30,8 @@ public class DepartmentController {
     public ResponseEntity<Department> newDepartment(@RequestBody() Department department) {
         if(department == null)return ResponseEntity.badRequest().build();
         Department newDepartment = departmentService.newDepartment(department);
-        return ResponseEntity.ok(newDepartment);
+        if(newDepartment != null) return ResponseEntity.ok(newDepartment);
+        return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/set-manager")

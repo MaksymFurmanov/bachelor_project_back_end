@@ -29,12 +29,13 @@ public class TestMaterialsController {
     public ResponseEntity<TestMaterials> newTestMaterials(@RequestBody() TestMaterials testMaterials) {
         if(testMaterials == null)return ResponseEntity.badRequest().build();
         TestMaterials newTestMaterials = testMaterialsService.newTestMaterials(testMaterials);
-        return ResponseEntity.ok(newTestMaterials);
+        if(newTestMaterials != null) return ResponseEntity.ok(newTestMaterials);
+        return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/load-tests-materials")
-    public ResponseEntity<Void> loadTestsMaterials(@RequestBody() TestMaterials[] testsMaterials) {
-        testMaterialsService.loadTestsMaterials(testsMaterials);
-        return ResponseEntity.ok(null);
+    public ResponseEntity<List<TestMaterials>>
+    loadTestsMaterials(@RequestBody() TestMaterials[] testsMaterials) {
+        return ResponseEntity.ok(testMaterialsService.loadTestsMaterials(testsMaterials));
     }
 }

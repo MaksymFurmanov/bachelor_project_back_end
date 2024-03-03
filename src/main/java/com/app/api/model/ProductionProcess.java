@@ -28,7 +28,9 @@ public class ProductionProcess {
 
     String done_name;
 
-    public ProductionProcess(Long production_process_id, Long product_id, Long department_id, String name, int queue, String done_name) {
+    public ProductionProcess(Long production_process_id, Long product_id,
+                             Long department_id, String name, int queue,
+                             String done_name) {
         this.production_process_id = production_process_id;
         this.product_id = product_id;
         this.department_id = department_id;
@@ -53,6 +55,10 @@ public class ProductionProcess {
 
     public void setProduct_id(Long product_id) {
         this.product_id = product_id;
+    }
+
+    public Product getProduct() {
+        return product;
     }
 
     public Long getDepartment_id() {

@@ -29,12 +29,12 @@ public class EntryStockPlaceController {
     public ResponseEntity<EntryStockPlace> newEntryStockPlace(@RequestBody() EntryStockPlace entryStockPlace) {
         if(entryStockPlace == null)return ResponseEntity.badRequest().build();
         EntryStockPlace newEntryStockPlace = entryStockPlaceService.newEntryStockPlace(entryStockPlace);
-        return ResponseEntity.ok(newEntryStockPlace);
+        if(newEntryStockPlace != null) return ResponseEntity.ok(newEntryStockPlace);
+        return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/load-entry-stock-places")
-    public ResponseEntity<Void> loadEntryStockPlaces(@RequestBody() EntryStockPlace[] entryStockPlaces) {
-        entryStockPlaceService.loadEntryStockPlaces(entryStockPlaces);
-        return ResponseEntity.ok(null);
+    public ResponseEntity<List<EntryStockPlace>> loadEntryStockPlaces(@RequestBody() EntryStockPlace[] entryStockPlaces) {
+        return ResponseEntity.ok(entryStockPlaceService.loadEntryStockPlaces(entryStockPlaces));
     }
 }

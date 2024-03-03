@@ -29,12 +29,19 @@ public class ProductController {
     public ResponseEntity<Product> newProduct(@RequestBody() Product product) {
         if(product == null)return ResponseEntity.badRequest().build();
         Product newProduct = productService.newProduct(product);
-        return ResponseEntity.ok(newProduct);
+        if(newProduct != null) return ResponseEntity.ok(newProduct);
+        return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/load-products")
-    public ResponseEntity<Void> loadProducts(@RequestBody() Product[] products) {
-        productService.loadProducts(products);
+    public ResponseEntity<List<Product>> loadProducts(@RequestBody() Product[] products) {
+        return ResponseEntity.ok(productService.loadProducts(products));
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<Void> deleteProduct(@RequestBody() Long productId) {
+        if (productId == null) return ResponseEntity.badRequest().build();
+        productService.deleteProduct(productId);
         return ResponseEntity.ok(null);
     }
 }

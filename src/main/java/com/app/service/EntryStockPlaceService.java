@@ -22,10 +22,12 @@ public class EntryStockPlaceService {
     }
 
     public EntryStockPlace newEntryStockPlace (EntryStockPlace entryStockPlace) {
-        return entryStockPlaceRepository.save(entryStockPlace);
+        EntryStockPlace savedEntryStockPlace = entryStockPlaceRepository.save(entryStockPlace);
+        return entryStockPlaceRepository
+                .findById(savedEntryStockPlace.getEntry_stock_place_id()).orElse(null);
     }
 
-    public void loadEntryStockPlaces(EntryStockPlace[] entryStockPlaces) {
-        entryStockPlaceRepository.saveAll(Arrays.asList(entryStockPlaces));
+    public List<EntryStockPlace> loadEntryStockPlaces(EntryStockPlace[] entryStockPlaces) {
+        return entryStockPlaceRepository.saveAll(Arrays.asList(entryStockPlaces));
     }
 }

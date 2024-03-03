@@ -21,21 +21,22 @@ public class TestProductsController {
     @GetMapping("/get-tests-products")
     public ResponseEntity<List<TestProducts>> getTestaProducts() {
         List<TestProducts> testsProducts = testProductsService.getTestsProducts();
-        if(testsProducts != null) return ResponseEntity.ok(testsProducts);
+        if (testsProducts != null) return ResponseEntity.ok(testsProducts);
         return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/new")
     public ResponseEntity<TestProducts> newTestProducts(@RequestBody() TestProducts testProducts) {
-        if(testProducts == null)return ResponseEntity.badRequest().build();
+        if (testProducts == null) return ResponseEntity.badRequest().build();
         TestProducts newTestProducts = testProductsService.newTestProducts(testProducts);
-        return ResponseEntity.ok(newTestProducts);
+        if(newTestProducts != null) return ResponseEntity.ok(newTestProducts);
+        return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/load-tests-products")
-    public ResponseEntity<Void> loadTestsProducts(@RequestBody() TestProducts[] testsProducts) {
-        if(testsProducts == null)return ResponseEntity.badRequest().build();
-        testProductsService.loadTestsProducts(testsProducts);
-        return ResponseEntity.ok(null);
+    public ResponseEntity<List<TestProducts>>
+    loadTestsProducts(@RequestBody() TestProducts[] testsProducts) {
+        if (testsProducts == null) return ResponseEntity.badRequest().build();
+        return ResponseEntity.ok(testProductsService.loadTestsProducts(testsProducts));
     }
 }

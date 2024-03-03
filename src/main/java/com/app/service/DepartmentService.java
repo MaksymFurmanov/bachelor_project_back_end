@@ -24,7 +24,8 @@ public class DepartmentService {
     }
 
     public Department newDepartment(Department department) {
-        return departmentRepository.save(department);
+        Department savedDepartment = departmentRepository.save(department);
+        return departmentRepository.findById(savedDepartment.getDepartment_id()).orElse(null);
     }
 
     public Boolean setManager(Employee employee) {

@@ -6,9 +6,9 @@ import jakarta.persistence.*;
 @Table(name = "ENTRY_STOCK_PLACES")
 public class EntryStockPlace {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "entery_stock_place_seq_gen")
-    @SequenceGenerator(name = "entery_stock_place_seq_gen", sequenceName = "entery_stock_place_seq_gen", allocationSize = 1)
-    Long entery_stock_place_id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "entry_stock_place_seq_gen")
+    @SequenceGenerator(name = "entry_stock_place_seq_gen", sequenceName = "entry_stock_place_seq_gen", allocationSize = 1)
+    Long entry_stock_place_id;
 
     Long material_id;
 
@@ -20,8 +20,8 @@ public class EntryStockPlace {
 
     int queue;
 
-    public EntryStockPlace(Long entery_stock_place_id, Long material_id, int box, int index) {
-        this.entery_stock_place_id = entery_stock_place_id;
+    public EntryStockPlace(Long entry_stock_place_id, Long material_id, int box, int index) {
+        this.entry_stock_place_id = entry_stock_place_id;
         this.material_id = material_id;
         this.box = box;
         this.queue = index;
@@ -29,12 +29,12 @@ public class EntryStockPlace {
 
     public EntryStockPlace() {}
 
-    public Long getEntery_stock_place_id() {
-        return entery_stock_place_id;
+    public Long getEntry_stock_place_id() {
+        return entry_stock_place_id;
     }
 
-    public void setEntery_stock_place_id(Long entery_stock_place_id) {
-        this.entery_stock_place_id = entery_stock_place_id;
+    public void setEntry_stock_place_id(Long entry_stock_place_id) {
+        this.entry_stock_place_id = entry_stock_place_id;
     }
 
     public Long getMaterial_id() {
@@ -43,6 +43,14 @@ public class EntryStockPlace {
 
     public void setMaterial_id(Long material_id) {
         this.material_id = material_id;
+    }
+
+    public Material getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 
     public int getBox() {
@@ -63,9 +71,10 @@ public class EntryStockPlace {
 
     @Override
     public String toString() {
-        return "EnteryStockPlace{" +
-                "entery_stock_place_id=" + entery_stock_place_id +
+        return "EntryStockPlace{" +
+                "entry_stock_place_id=" + entry_stock_place_id +
                 ", material_id=" + material_id +
+                ", material=" + material +
                 ", box=" + box +
                 ", queue=" + queue +
                 '}';

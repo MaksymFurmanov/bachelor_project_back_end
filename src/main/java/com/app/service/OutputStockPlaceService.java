@@ -22,10 +22,12 @@ public class OutputStockPlaceService {
     }
 
     public OutputStockPlace newOutputStockPlace (OutputStockPlace outputStockPlace) {
-        return outputStockPlaceRepository.save(outputStockPlace);
+        OutputStockPlace savedOutputStockPlace = outputStockPlaceRepository.save(outputStockPlace);
+        return outputStockPlaceRepository
+                .findById(savedOutputStockPlace.getOutput_stock_place_id()).orElse(null);
     }
 
-    public void loadOutputStockPlaces(OutputStockPlace[] outputStockPlaces) {
-        outputStockPlaceRepository.saveAll(Arrays.asList(outputStockPlaces));
+    public List<OutputStockPlace> loadOutputStockPlaces(OutputStockPlace[] outputStockPlaces) {
+        return outputStockPlaceRepository.saveAll(Arrays.asList(outputStockPlaces));
     }
 }

@@ -95,7 +95,7 @@ public class Product {
     @Override
     public String toString() {
         return "Product{" +
-                "test_id=" + product_id +
+                "product_id=" + product_id +
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", per_pallet=" + per_pallet +

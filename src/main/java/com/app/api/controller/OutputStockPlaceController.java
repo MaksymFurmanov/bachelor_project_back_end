@@ -21,20 +21,21 @@ public class OutputStockPlaceController {
     @GetMapping("/get-output-stock-places")
     public ResponseEntity<List<OutputStockPlace>> getOutputStockPlaces() {
         List<OutputStockPlace> outputStockPlaces = outputStockPlaceService.getOutputStockPlaces();
-        if(outputStockPlaces != null) return ResponseEntity.ok(outputStockPlaces);
+        if (outputStockPlaces != null) return ResponseEntity.ok(outputStockPlaces);
         return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/new")
     public ResponseEntity<OutputStockPlace> newOutputStockPlace(@RequestBody() OutputStockPlace outputStockPlace) {
-        if(outputStockPlace == null)return ResponseEntity.badRequest().build();
+        if (outputStockPlace == null) return ResponseEntity.badRequest().build();
         OutputStockPlace newOutputStockPlace = outputStockPlaceService.newOutputStockPlace(outputStockPlace);
-        return ResponseEntity.ok(newOutputStockPlace);
+        if(newOutputStockPlace != null) return ResponseEntity.ok(newOutputStockPlace);
+        return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/load-output-stock-places")
-    public ResponseEntity<Void> loadOutputStockPlaces(@RequestBody() OutputStockPlace[] outputStockPlaces) {
-        outputStockPlaceService.loadOutputStockPlaces(outputStockPlaces);
-        return ResponseEntity.ok(null);
+    public ResponseEntity<List<OutputStockPlace>>
+    loadOutputStockPlaces(@RequestBody() OutputStockPlace[] outputStockPlaces) {
+        return ResponseEntity.ok(outputStockPlaceService.loadOutputStockPlaces(outputStockPlaces));
     }
 }

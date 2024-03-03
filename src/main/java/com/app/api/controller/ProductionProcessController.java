@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -22,21 +21,20 @@ public class ProductionProcessController {
     @GetMapping("/get-production-processes")
     public ResponseEntity<List<ProductionProcess>> getProductionProcesses() {
         List<ProductionProcess> productionProcesses = productionProcessService.getProductionProcesses();
-        if(productionProcesses != null) return ResponseEntity.ok(productionProcesses);
+        if (productionProcesses != null) return ResponseEntity.ok(productionProcesses);
         return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/new")
     public ResponseEntity<ProductionProcess> newProductionProcess(@RequestBody() ProductionProcess productionProcess) {
-        if(productionProcess == null)return ResponseEntity.badRequest().build();
+        if (productionProcess == null) return ResponseEntity.badRequest().build();
         ProductionProcess newProductionProcess = productionProcessService.newProductionProcess(productionProcess);
-        return ResponseEntity.ok(newProductionProcess);
+        if (newProductionProcess != null) return ResponseEntity.ok(newProductionProcess);
+        return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/load-production-processes")
-    public ResponseEntity<Void> loadProductionProcesses(@RequestBody() ProductionProcess[] productionProcesses) {
-        System.out.println(Arrays.toString(productionProcesses));
-        productionProcessService.loadProductionProcesses(productionProcesses);
-        return ResponseEntity.ok(null);
+    public ResponseEntity<List<ProductionProcess>> loadProductionProcesses(@RequestBody() ProductionProcess[] productionProcesses) {
+        return ResponseEntity.ok(productionProcessService.loadProductionProcesses(productionProcesses));
     }
 }

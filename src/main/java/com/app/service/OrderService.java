@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class OrderService {
@@ -31,52 +31,47 @@ public class OrderService {
     }
 
     public Order newOrder(Order order) {
-        return orderRepository.save(order);
+        Order savedOrder = orderRepository.save(order);
+        return orderRepository.findById(savedOrder.getOrder_id()).orElse(null);
     }
 
-    public void processDone(Long orderId) {
-        Optional<Order> orderOptional = orderRepository.findById(orderId);
+    public Order processDone(Long orderId) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new IllegalArgumentException("Order not found"));
 
-        orderOptional.ifPresentOrElse(order -> {
-            Product product = order.getProduct();
-            Optional<ProductionProcess> productionProcessOptional =
-                    Optional.ofNullable(order.getProductionProcess());
+        Product product = order.getProduct();
+        ProductionProcess productionProcess = order.getProductionProcess();
 
-            productionProcessOptional.ifPresentOrElse(productionProcess -> {
-                Optional<ProductionProcess> nextProcessOptional =
-                        Optional.ofNullable(productionProcessRepository
-                                .findByProductAndQueue(product,
-                                        productionProcess.getQueue() + 1));
+        if (productionProcess != null) {
+            int nextQueue = productionProcess.getQueue() + 1;
+            ProductionProcess nextProcess = productionProcessRepository
+                    .findByProductAndQueue(product, nextQueue);
+            if (nextProcess != null) {
+                order.setProduction_process_id(nextProcess.getProduction_process_id());
+            } else {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+                String formattedDate = formatter.format(LocalDate.now());
+                order.setDone_date(formattedDate);
+            }
+        } else {
+            ProductionProcess firstProcess = productionProcessRepository
+                    .findByProductAndQueue(product, 0);
+            if (firstProcess != null) {
+                order.setProduction_process_id(firstProcess.getProduction_process_id());
+            } else {
+                throw new IllegalArgumentException("Production processes aren't defined");
+            }
+        }
 
-                nextProcessOptional.ifPresentOrElse(nextProcess -> {
-                    order.setProduction_process_id(nextProcess
-                            .getProduction_process_id());
-                    orderRepository.save(order);
-                }, () -> {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-                    String formattedDate = formatter.format(LocalDate.now());
-                    order.setDone_date(formattedDate);
-                    orderRepository.save(order);
-                });
-            }, () -> {
-                Optional<ProductionProcess> firstProductionProcessOptional =
-                        Optional.ofNullable(productionProcessRepository
-                                .findByProductAndQueue(product, 0));
-
-                firstProductionProcessOptional.ifPresentOrElse(firstProductionProcess -> {
-                    order.setProduction_process_id(
-                            firstProductionProcess.getProduction_process_id());
-                    orderRepository.save(order);
-                }, () -> {
-                    throw new IllegalArgumentException("Production processes aren't defined");
-                });
-            });
-        }, () -> {
-            throw new IllegalArgumentException("Order is not found");
-        });
+        Order savedOrder = orderRepository.save(order);
+        return orderRepository.findById(savedOrder.getOrder_id()).orElse(null);
     }
 
-    public void loadOrders(Order[] orders) {
-        orderRepository.saveAll(Arrays.asList(orders));
+    public List<Order> loadOrders(Order[] orders) {
+        return orderRepository.saveAll(Arrays.asList(orders));
+    }
+
+    public void deleteOrder(Long orderId) {
+        orderRepository.deleteAllById(Collections.singleton(orderId));
     }
 }
