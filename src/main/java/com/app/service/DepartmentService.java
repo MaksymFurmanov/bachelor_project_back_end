@@ -28,17 +28,22 @@ public class DepartmentService {
         return departmentRepository.findById(savedDepartment.getDepartment_id()).orElse(null);
     }
 
-    public Boolean setManager(Employee employee) {
+    public Department updateDepartment(Department department) {
+        Department updateDepartment = departmentRepository.findById(department.getDepartment_id())
+                .orElseThrow(() -> new IllegalArgumentException("Employee not exist with this id"));
+        return departmentRepository.save(updateDepartment);
+    }
+
+    public Department setManager(Employee employee) {
         Optional<Department> departmentOptional =
                 departmentRepository.findById(employee.getDepartment_id());
+        System.out.println(employee);
         if (departmentOptional.isPresent()) {
             Department department = departmentOptional.get();
             department.setManager_id(employee.getEmployee_id());
-            System.out.println(department);
-            departmentRepository.save(department);
-            return true;
+            return departmentRepository.save(department);
         }
-        return false;
+        return null;
     }
 
     public void loadDepartments(Department[] departments) {

@@ -18,7 +18,7 @@ public class MaterialController {
         this.materialService = materialService;
     }
 
-    @GetMapping("/get-materials")
+    @GetMapping("")
     public ResponseEntity<List<Material>> getMaterials() {
         List<Material> materials = materialService.getMaterials();
         if (materials != null) return ResponseEntity.ok(materials);

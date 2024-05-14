@@ -18,7 +18,7 @@ public class ProductionProcessController {
         this.productionProcessService = productionProcessService;
     }
 
-    @GetMapping("/get-production-processes")
+    @GetMapping("")
     public ResponseEntity<List<ProductionProcess>> getProductionProcesses() {
         List<ProductionProcess> productionProcesses = productionProcessService.getProductionProcesses();
         if (productionProcesses != null) return ResponseEntity.ok(productionProcesses);

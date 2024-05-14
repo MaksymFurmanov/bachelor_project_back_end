@@ -24,7 +24,7 @@ public class OrderController {
         return ResponseEntity.ok(orderService.processDone(orderId));
     }
 
-    @GetMapping("/get-orders")
+    @GetMapping("")
     public ResponseEntity<List<Order>> getOrders() {
         List<Order> orders = orderService.getOrders();
         if(orders != null) return ResponseEntity.ok(orders);

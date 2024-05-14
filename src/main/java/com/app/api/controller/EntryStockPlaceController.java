@@ -18,7 +18,7 @@ public class EntryStockPlaceController {
         this.entryStockPlaceService = entryStockPlaceService;
     }
 
-    @GetMapping("/get-entry-stock-places")
+    @GetMapping("")
     public ResponseEntity<List<EntryStockPlace>> getEntryStockPlaces() {
         List<EntryStockPlace> entryStockPlaces = entryStockPlaceService.getEntryStockPlaces();
         if(entryStockPlaces != null) return ResponseEntity.ok(entryStockPlaces);

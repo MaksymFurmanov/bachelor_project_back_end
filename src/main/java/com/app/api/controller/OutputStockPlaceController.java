@@ -18,7 +18,7 @@ public class OutputStockPlaceController {
         this.outputStockPlaceService = outputStockPlaceService;
     }
 
-    @GetMapping("/get-output-stock-places")
+    @GetMapping("")
     public ResponseEntity<List<OutputStockPlace>> getOutputStockPlaces() {
         List<OutputStockPlace> outputStockPlaces = outputStockPlaceService.getOutputStockPlaces();
         if (outputStockPlaces != null) return ResponseEntity.ok(outputStockPlaces);

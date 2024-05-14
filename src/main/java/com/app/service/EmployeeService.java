@@ -1,7 +1,6 @@
 package com.app.service;
 
 import com.app.api.model.Employee;
-import com.app.repository.DepartmentRepository;
 import com.app.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,13 +30,20 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public Employee newEmployee (Employee employee) {
+    public Employee newEmployee(Employee employee) {
         Employee savedEmployee = employeeRepository.save(employee);
         return employeeRepository.findById(savedEmployee.getEmployee_id()).orElse(null);
     }
 
     public List<Employee> loadEmployees(Employee[] employees) {
         return employeeRepository.saveAll(Arrays.asList(employees));
+    }
+
+    public Employee updateEmployee(Employee employee) {
+        employeeRepository.findById(employee.getEmployee_id())
+                .orElseThrow(() -> new IllegalArgumentException("Employee not exist with this id"));
+        Employee updatedEmployee = employeeRepository.save(employee);
+        return employeeRepository.findById(updatedEmployee.getEmployee_id()).orElse(null);
     }
 
     public void deleteEmployee(Long employeeId) {

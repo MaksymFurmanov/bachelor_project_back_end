@@ -30,24 +30,32 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping("/employees/get-employees")
+    @GetMapping("/employees")
     public ResponseEntity<List<Employee>> getEmployees() {
         List<Employee> employees = employeeService.getEmployees();
-        if(employees != null) return ResponseEntity.ok(employees);
+        if (employees != null) return ResponseEntity.ok(employees);
         return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/employees/new")
     public ResponseEntity<Employee> newEmployee(@RequestBody() Employee employee) {
-        if(employee == null)return ResponseEntity.badRequest().build();
+        if (employee == null) return ResponseEntity.badRequest().build();
         Employee newEmployee = employeeService.newEmployee(employee);
-        if(newEmployee != null) return ResponseEntity.ok(newEmployee);
+        if (newEmployee != null) return ResponseEntity.ok(newEmployee);
         return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/employees/load-employees")
     public ResponseEntity<List<Employee>> loadEmployees(@RequestBody() Employee[] employees) {
         return ResponseEntity.ok(employeeService.loadEmployees(employees));
+    }
+
+    @PutMapping("employees/update")
+    public ResponseEntity<Employee> updateEmployee(@RequestBody() Employee employee) {
+        if (employee == null) return ResponseEntity.badRequest().build();
+        Employee updatedEmployee = employeeService.updateEmployee(employee);
+        if (updatedEmployee != null) return ResponseEntity.ok(updatedEmployee);
+        return ResponseEntity.badRequest().build();
     }
 
     @DeleteMapping("employees/delete")

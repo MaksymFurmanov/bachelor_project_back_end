@@ -10,19 +10,19 @@ public class OutputStockPlace {
     @SequenceGenerator(name = "output_stock_place_seq_gen", sequenceName = "output_stock_place_seq_gen", allocationSize = 1)
     Long output_stock_place_id;
 
-    Long order_id;
+    Long product_id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "order_id", referencedColumnName = "order_id", insertable = false, updatable = false)
-    Order order;
+    @JoinColumn(name = "product_id", referencedColumnName = "product_id", insertable = false, updatable = false)
+    Product product;
 
     int box;
 
     int queue;
 
-    public OutputStockPlace(Long output_stock_place_id, Long order_id, int box, int queue) {
+    public OutputStockPlace(Long output_stock_place_id, Long product_id, int box, int queue) {
         this.output_stock_place_id = output_stock_place_id;
-        this.order_id = order_id;
+        this.product_id = product_id;
         this.box = box;
         this.queue = queue;
     }
@@ -37,20 +37,20 @@ public class OutputStockPlace {
         this.output_stock_place_id = output_stock_place_id;
     }
 
-    public Long getOrder_id() {
-        return order_id;
+    public Long getProduct_id() {
+        return product_id;
     }
 
-    public void setOrder_id(Long order_id) {
-        this.order_id = order_id;
+    public void setProduct_id(Long product_id) {
+        this.product_id = product_id;
     }
 
-    public Order getOrder() {
-        return order;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public int getBox() {
@@ -73,8 +73,8 @@ public class OutputStockPlace {
     public String toString() {
         return "OutputStockPlace{" +
                 "output_stock_place_id=" + output_stock_place_id +
-                ", order_id=" + order_id +
-                ", order=" + order +
+                ", product_id=" + product_id +
+                ", product=" + product +
                 ", box=" + box +
                 ", queue=" + queue +
                 '}';

@@ -18,7 +18,7 @@ public class TestMaterialsController {
         this.testMaterialsService = testMaterialsService;
     }
 
-    @GetMapping("/get-tests-materials")
+    @GetMapping("")
     public ResponseEntity<List<TestMaterials>> getTestaMaterials() {
         List<TestMaterials> testsMaterials = testMaterialsService.getTestsMaterials();
         if(testsMaterials != null) return ResponseEntity.ok(testsMaterials);
