@@ -5,7 +5,6 @@ import com.app.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -33,10 +32,6 @@ public class EmployeeService {
     public Employee newEmployee(Employee employee) {
         Employee savedEmployee = employeeRepository.save(employee);
         return employeeRepository.findById(savedEmployee.getEmployee_id()).orElse(null);
-    }
-
-    public List<Employee> loadEmployees(Employee[] employees) {
-        return employeeRepository.saveAll(Arrays.asList(employees));
     }
 
     public Employee updateEmployee(Employee employee) {

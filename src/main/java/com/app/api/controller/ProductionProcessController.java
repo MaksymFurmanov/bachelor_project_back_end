@@ -25,16 +25,9 @@ public class ProductionProcessController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/new")
-    public ResponseEntity<ProductionProcess> newProductionProcess(@RequestBody() ProductionProcess productionProcess) {
-        if (productionProcess == null) return ResponseEntity.badRequest().build();
-        ProductionProcess newProductionProcess = productionProcessService.newProductionProcess(productionProcess);
-        if (newProductionProcess != null) return ResponseEntity.ok(newProductionProcess);
-        return ResponseEntity.badRequest().build();
-    }
-
-    @PostMapping("/load-production-processes")
-    public ResponseEntity<List<ProductionProcess>> loadProductionProcesses(@RequestBody() ProductionProcess[] productionProcesses) {
-        return ResponseEntity.ok(productionProcessService.loadProductionProcesses(productionProcesses));
+    @PutMapping("/upload")
+    public ResponseEntity<List<ProductionProcess>>
+    uploadProductionProcesses(@RequestBody() ProductionProcess[] productionProcesses) {
+        return ResponseEntity.ok(productionProcessService.uploadProductionProcesses(productionProcesses));
     }
 }

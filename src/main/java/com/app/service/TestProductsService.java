@@ -5,7 +5,6 @@ import com.app.repository.TestProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -26,7 +25,10 @@ public class TestProductsService {
         return testProductsRepository.findById(savedTestProducts.getTest_id()).orElse(null);
     }
 
-    public List<TestProducts> loadTestsProducts(TestProducts[] testsProducts) {
-        return testProductsRepository.saveAll(Arrays.asList(testsProducts));
+    public TestProducts updateTestProducts(TestProducts testProducts) {
+        testProductsRepository.findById(testProducts.getTest_id())
+                .orElseThrow(() -> new IllegalArgumentException("Test products not exist with this id"));
+        TestProducts updatedTestProducts = testProductsRepository.save(testProducts);
+        return testProductsRepository.findById(updatedTestProducts.getTest_id()).orElse(null);
     }
 }

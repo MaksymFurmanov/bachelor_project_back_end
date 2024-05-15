@@ -5,7 +5,6 @@ import com.app.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -27,10 +26,12 @@ public class ProductService {
         return productRepository.findById(savedProduct.getProduct_id()).orElse(null);
     }
 
-    public List<Product> loadProducts(Product[] products) {
-        return productRepository.saveAll(Arrays.asList(products));
+    public Product updateProduct(Product product) {
+        productRepository.findById(product.getProduct_id())
+                .orElseThrow(() -> new IllegalArgumentException("Product not exist with this id"));
+        Product updatedProduct = productRepository.save(product);
+        return productRepository.findById(updatedProduct.getProduct_id()).orElse(null);
     }
-
     public void deleteProduct(Long productId) {
         productRepository.deleteAllById(Collections.singleton(productId));
     }

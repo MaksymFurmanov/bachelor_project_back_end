@@ -29,14 +29,16 @@ public class MaterialController {
     public ResponseEntity<Material> newMaterial(@RequestBody() Material material) {
         if (material == null) return ResponseEntity.badRequest().build();
         Material newMaterial = materialService.newMaterial(material);
-        if(newMaterial != null) return ResponseEntity.ok(newMaterial);
+        if (newMaterial != null) return ResponseEntity.ok(newMaterial);
         return ResponseEntity.badRequest().build();
     }
 
-    @PostMapping("/load-materials")
-    public ResponseEntity<List<Material>> loadMaterials(@RequestBody() Material[] materials) {
-        if (materials != null) return ResponseEntity.ok(materialService.loadMaterials(materials));
-        else return ResponseEntity.badRequest().build();
+    @PutMapping("/update")
+    public ResponseEntity<Material> updateMaterial(@RequestBody Material material) {
+        if (material == null) return ResponseEntity.badRequest().build();
+        Material updatedMaterial = materialService.updateMaterial(material);
+        if (updatedMaterial != null) return ResponseEntity.ok(updatedMaterial);
+        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/delete")

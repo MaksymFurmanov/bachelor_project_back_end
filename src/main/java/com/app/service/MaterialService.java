@@ -5,7 +5,6 @@ import com.app.repository.MaterialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,13 +21,16 @@ public class MaterialService {
         return materialRepository.findAll();
     }
 
-    public Material newMaterial (Material material) {
+    public Material newMaterial(Material material) {
         Material savedMaterial = materialRepository.save(material);
         return materialRepository.findById(savedMaterial.getMaterial_id()).orElse(null);
     }
 
-    public List<Material> loadMaterials(Material[] materials) {
-        return materialRepository.saveAll(Arrays.asList(materials));
+    public Material updateMaterial(Material material) {
+        materialRepository.findById(material.getMaterial_id())
+                .orElseThrow(() -> new IllegalArgumentException("Material not exist with this id"));
+        Material updatedMaterial = materialRepository.save(material);
+        return materialRepository.findById(updatedMaterial.getMaterial_id()).orElse(null);
     }
 
     public void deleteMaterial(Long materialId) {

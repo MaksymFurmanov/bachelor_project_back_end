@@ -33,10 +33,11 @@ public class TestProductsController {
         return ResponseEntity.badRequest().build();
     }
 
-    @PostMapping("/load-tests-products")
-    public ResponseEntity<List<TestProducts>>
-    loadTestsProducts(@RequestBody() TestProducts[] testsProducts) {
-        if (testsProducts == null) return ResponseEntity.badRequest().build();
-        return ResponseEntity.ok(testProductsService.loadTestsProducts(testsProducts));
+    @PutMapping("/update")
+    public ResponseEntity<TestProducts> updateTestProducts(@RequestBody TestProducts testProducts) {
+        if (testProducts == null) return ResponseEntity.badRequest().build();
+        TestProducts updatedTestProducts = testProductsService.updateTestProducts(testProducts);
+        if (updatedTestProducts != null) return ResponseEntity.ok(updatedTestProducts);
+        return ResponseEntity.notFound().build();
     }
 }

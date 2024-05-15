@@ -45,20 +45,15 @@ public class EmployeeController {
         return ResponseEntity.badRequest().build();
     }
 
-    @PostMapping("/employees/load-employees")
-    public ResponseEntity<List<Employee>> loadEmployees(@RequestBody() Employee[] employees) {
-        return ResponseEntity.ok(employeeService.loadEmployees(employees));
-    }
-
-    @PutMapping("employees/update")
-    public ResponseEntity<Employee> updateEmployee(@RequestBody() Employee employee) {
+    @PutMapping("/employees/update")
+    public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee) {
         if (employee == null) return ResponseEntity.badRequest().build();
         Employee updatedEmployee = employeeService.updateEmployee(employee);
         if (updatedEmployee != null) return ResponseEntity.ok(updatedEmployee);
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("employees/delete")
+    @DeleteMapping("/employees/delete")
     public ResponseEntity<Void> deleteEmployee(@RequestBody() Long employeeId) {
         if (employeeId == null) return ResponseEntity.badRequest().build();
         employeeService.deleteEmployee(employeeId);

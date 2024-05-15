@@ -18,30 +18,33 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @PostMapping("/done")
-    public ResponseEntity<Order> processDone(@RequestBody() Long orderId) {
-        if(orderId == null)ResponseEntity.badRequest().build();
-        return ResponseEntity.ok(orderService.processDone(orderId));
-    }
-
     @GetMapping("")
     public ResponseEntity<List<Order>> getOrders() {
         List<Order> orders = orderService.getOrders();
-        if(orders != null) return ResponseEntity.ok(orders);
+        if (orders != null) return ResponseEntity.ok(orders);
         return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/done")
+    public ResponseEntity<Order> processDone(@RequestBody() Long orderId) {
+        if (orderId == null) ResponseEntity.badRequest().build();
+        return ResponseEntity.ok(orderService.processDone(orderId));
     }
 
     @PostMapping("/new")
     public ResponseEntity<Order> newOrder(@RequestBody() Order order) {
-        if(order == null)return ResponseEntity.badRequest().build();
+        if (order == null) return ResponseEntity.badRequest().build();
         Order newOrder = orderService.newOrder(order);
-        if(newOrder != null) return ResponseEntity.ok(newOrder);
+        if (newOrder != null) return ResponseEntity.ok(newOrder);
         return ResponseEntity.badRequest().build();
     }
 
-    @PostMapping("/load-orders")
-    public ResponseEntity<List<Order>> loadOrders(@RequestBody() Order[] orders) {
-        return ResponseEntity.ok(orderService.loadOrders(orders));
+    @PutMapping("/update")
+    public ResponseEntity<Order> updateOrder(@RequestBody Order order) {
+        if (order == null) return ResponseEntity.badRequest().build();
+        Order updatedOrder = orderService.updateOrder(order);
+        if (updatedOrder != null) return ResponseEntity.ok(updatedOrder);
+        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/delete")

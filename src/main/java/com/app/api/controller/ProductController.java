@@ -33,9 +33,12 @@ public class ProductController {
         return ResponseEntity.badRequest().build();
     }
 
-    @PostMapping("/load-products")
-    public ResponseEntity<List<Product>> loadProducts(@RequestBody() Product[] products) {
-        return ResponseEntity.ok(productService.loadProducts(products));
+    @PutMapping("/update")
+    public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
+        if (product == null) return ResponseEntity.badRequest().build();
+        Product updatedProduct = productService.updateProduct(product);
+        if (updatedProduct != null) return ResponseEntity.ok(updatedProduct);
+        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/delete")

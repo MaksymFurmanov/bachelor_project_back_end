@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,11 +27,6 @@ public class OrderService {
 
     public List<Order> getOrders() {
         return orderRepository.findAll();
-    }
-
-    public Order newOrder(Order order) {
-        Order savedOrder = orderRepository.save(order);
-        return orderRepository.findById(savedOrder.getOrder_id()).orElse(null);
     }
 
     public Order processDone(Long orderId) {
@@ -67,8 +61,16 @@ public class OrderService {
         return orderRepository.findById(savedOrder.getOrder_id()).orElse(null);
     }
 
-    public List<Order> loadOrders(Order[] orders) {
-        return orderRepository.saveAll(Arrays.asList(orders));
+    public Order newOrder(Order order) {
+        Order savedOrder = orderRepository.save(order);
+        return orderRepository.findById(savedOrder.getOrder_id()).orElse(null);
+    }
+
+    public Order updateOrder(Order order) {
+        orderRepository.findById(order.getOrder_id())
+                .orElseThrow(() -> new IllegalArgumentException("Order not exist with this id"));
+        Order updatedOrder = orderRepository.save(order);
+        return orderRepository.findById(updatedOrder.getOrder_id()).orElse(null);
     }
 
     public void deleteOrder(Long orderId) {

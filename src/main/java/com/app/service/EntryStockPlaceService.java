@@ -21,13 +21,7 @@ public class EntryStockPlaceService {
         return entryStockPlaceRepository.findAll();
     }
 
-    public EntryStockPlace newEntryStockPlace (EntryStockPlace entryStockPlace) {
-        EntryStockPlace savedEntryStockPlace = entryStockPlaceRepository.save(entryStockPlace);
-        return entryStockPlaceRepository
-                .findById(savedEntryStockPlace.getEntry_stock_place_id()).orElse(null);
-    }
-
-    public List<EntryStockPlace> loadEntryStockPlaces(EntryStockPlace[] entryStockPlaces) {
+    public List<EntryStockPlace> uploadEntryStockPlaces(EntryStockPlace[] entryStockPlaces) {
         return entryStockPlaceRepository.saveAll(Arrays.asList(entryStockPlaces));
     }
 }

@@ -25,16 +25,9 @@ public class EntryStockPlaceController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/new")
-    public ResponseEntity<EntryStockPlace> newEntryStockPlace(@RequestBody() EntryStockPlace entryStockPlace) {
-        if(entryStockPlace == null)return ResponseEntity.badRequest().build();
-        EntryStockPlace newEntryStockPlace = entryStockPlaceService.newEntryStockPlace(entryStockPlace);
-        if(newEntryStockPlace != null) return ResponseEntity.ok(newEntryStockPlace);
-        return ResponseEntity.badRequest().build();
-    }
-
-    @PostMapping("/load-entry-stock-places")
-    public ResponseEntity<List<EntryStockPlace>> loadEntryStockPlaces(@RequestBody() EntryStockPlace[] entryStockPlaces) {
-        return ResponseEntity.ok(entryStockPlaceService.loadEntryStockPlaces(entryStockPlaces));
+    @PutMapping("/upload")
+    public ResponseEntity<List<EntryStockPlace>>
+    uploadEntryStockPlaces(@RequestBody() EntryStockPlace[] entryStockPlaces) {
+        return ResponseEntity.ok(entryStockPlaceService.uploadEntryStockPlaces(entryStockPlaces));
     }
 }
