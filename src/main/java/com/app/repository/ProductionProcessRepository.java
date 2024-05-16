@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface ProductionProcessRepository extends JpaRepository<ProductionProcess, Long> {
     ProductionProcess findByProductAndQueue(Product product_id, int queue);
-    List<ProductionProcess> findByProduct_id(Long product_id);
+    List<ProductionProcess> findAllByProduct(Product product_id);
 }

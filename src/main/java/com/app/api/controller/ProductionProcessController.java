@@ -27,7 +27,7 @@ public class ProductionProcessController {
 
     @PutMapping("/upload")
     public ResponseEntity<List<ProductionProcess>>
-    uploadProductionProcesses(@RequestBody() ProductionProcess[] productionProcesses) {
+    uploadProductionProcesses(@RequestBody ProductionProcess[] productionProcesses) {
         return ResponseEntity.ok(productionProcessService.uploadProductionProcesses(productionProcesses));
     }
 }

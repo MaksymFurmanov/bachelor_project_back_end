@@ -25,7 +25,7 @@ public class OutputStockPlaceController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/upload")
+    @PutMapping("/upload")
     public ResponseEntity<List<OutputStockPlace>>
     uploadOutputStockPlaces(@RequestBody() OutputStockPlace[] outputStockPlaces) {
         return ResponseEntity.ok(outputStockPlaceService.uploadOutputStockPlaces(outputStockPlaces));
